@@ -1,4 +1,4 @@
-function Exergia_Com_graf(X1, YMatrix1)
+function Exergia_Com_graf(X1, YMatrix1,opt)
 %CREATEFIGURE(X1, YMATRIX1)
 %  X1:  vector of x data
 %  YMATRIX1:  matrix of y data
@@ -36,9 +36,13 @@ ylabel('Exergetic Efficiency [%]','FontName','Times New Roman');
 
 % Uncomment the following line to preserve the X-limits of the axes
 xlim(axes1,[30 200]);
-%ylim(axes1,[9 26]);
-ylim(axes1,[5 25]);
-%ylim(axes1,[10 31]);
+
+switch opt
+    case 'heat'
+        ylim(axes1,[9 31]);
+    otherwise
+        ylim(axes1,[5 25]);
+end
 box(axes1,'on');
 % Set the remaining axes properties
 set(axes1,'FontName','Times New Roman','FontSize',11,'XGrid','on','YGrid',...

@@ -7,8 +7,8 @@ eqn(3) = eta_1==eta_el+eta_ther;
 eqn(4) = eta_2==(1-(T_amb+273)/(T_cel+273))*eta_ther+eta_el;
 eqn(5) = eta_frio==eta_ther*COP_chiller;
 eqn(6) = eta_2chiller==((T_amb+273)/(T_gelada+273)-1)*eta_frio+eta_el;
-%eqn(7) = eta_2==eta_ref;
-%eqn(7) = eta_2chiller==eta_ref;
+% eqn(7) = eta_2==eta_ref;
+eqn(7) = eta_2chiller==eta_ref;
 eqn(8) = beta == 0.005; %0.002; % 
 eqn(9) = T_fria==30;
 eqn(10) = T_gelada==5;
@@ -37,7 +37,7 @@ for k = 1:5
     eqn(7) = T_cel==x(i);
     S=vpasolve(eqn);
     if max(S.eta_2)>0 & isreal(max(S.eta_2))
-        y(i,2*(k-1)+j)=max(S.eta_1); %max(S.eta_el)+max(S.eta_frio); % 
+        y(i,2*(k-1)+j)=max(S.eta_el)+max(S.eta_frio); % max(S.eta_1); %
     else
         y(i,2*(k-1)+j) = 0;
     end
@@ -53,4 +53,4 @@ for i = 1:size(y,2)
      yy(:,i) = fnval(pp,xx)';
 end
 %Energia_Sem_graf(x,y*100)
-Energia_Com_graf(x,y*100)
+Energia_Com_graf(x,y*100,'cool')
